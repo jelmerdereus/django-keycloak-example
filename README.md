@@ -1,3 +1,10 @@
+# STATUS: starting project, not usable yet
+## TODO
+- create templates for Django to display roles / claims
+- automate Keycloak default config with realm and role and example user
+- create a Docker Compose setup that just sets up everything
+- update README
+
 ## Django Keycloak tryout project
 This project uses Django and Keycloak to authenticate users and implements a simple setup to extend for small projects.
 
