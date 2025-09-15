@@ -1,0 +1,66 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.Python
+.python-version
+
+# Poetry (in-project virtualenv)
+.venv/
+
+# Build artifacts
+build/
+dist/
+wheelhouse/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+static_root/
+collected_static/
+
+# Environment and secrets
+.env
+.env.*
+*.env
+.envrc
+
+# Caches and test artifacts
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+ruff_cache/
+.pyre/
+.pytype/
+
+# Logs
+logs/
+*.log
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Optional: local-only compose override
+docker-compose.override.yml
+
+# Frontend (if present)
+node_modules/
+npm-debug.log*
