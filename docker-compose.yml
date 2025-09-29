@@ -39,7 +39,7 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: "${KEYCLOAK_ADMIN_PASSWORD}"
       KC_HEALTH_ENABLED: "${KC_HEALTH_ENABLED}"
       KC_LOG_LEVEL: "${KC_LOG_LEVEL}"
-    command: ["start-dev", "--http-port", "8080", "--https-port", "8443"]
+    command: [ "start-dev", "--http-port", "8080", "--https-port", "8443" ]
 
   # PostgreSQL
   postgres:

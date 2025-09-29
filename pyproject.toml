@@ -3,7 +3,7 @@ name = "dcloak"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Jelmer de Reus",email = "you@example.com"}
+    { name = "Jelmer de Reus", email = "you@example.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.13"

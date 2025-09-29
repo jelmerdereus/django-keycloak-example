@@ -2,7 +2,9 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+
 import dotenv
+
 
 def main():
     # load .env file when available for local development

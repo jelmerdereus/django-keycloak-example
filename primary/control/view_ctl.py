@@ -1,6 +1,8 @@
 import logging
-from django.http import HttpRequest, HttpResponse
 from functools import wraps
+
+from django.http import HttpRequest, HttpResponse
+
 
 def allow_methods(*methods: str):
     """
@@ -17,5 +19,7 @@ def allow_methods(*methods: str):
                                 f"(allowed: {sorted(allowed)})")
                 return HttpResponse("Forbidden", status=403)
             return view_func(req, *args, **kwargs)
+
         return _wrapped
+
     return decorator

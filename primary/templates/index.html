@@ -2,85 +2,72 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-<h3>Keycloak user page</h3>
-<br>
-<!-- tab navs -->
-<ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a
-                data-mdb-tab-init
-                class="nav-link active"
-                id="ex1-tab-1"
-                href="#"
-                role="tab"
-                aria-controls="ex1-tabs-1"
-                aria-selected="true"
-                onclick="choose_realm_roles()"
-        >My Realm Roles</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a
-                data-mdb-tab-init
-                class="nav-link"
-                id="ex1-tab-2"
-                href="#"
-                role="tab"
-                aria-controls="ex1-tabs-2"
-                aria-selected="false"
-                onclick="alert('not implemented yet');"
-        >Other Stuff</a>
-    </li>
-</ul>
+    {% if user.is_authenticated %}
+        <h3>Keycloak user page</h3>
+        <br>
+        <!-- tab navs -->
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a
+                        data-mdb-tab-init
+                        class="nav-link active"
+                        id="ex1-tab-1"
+                        href="#"
+                        role="tab"
+                        aria-controls="ex1-tabs-1"
+                        aria-selected="true"
+                        onclick="choose_realm_roles()"
+                >My Realm Roles</a>
+            </li>
+            </li>
+        </ul>
 
 
-<!-- tab content -->
-<div class="tab-content" id="ex1-content">
-    <div
-            class="tab-pane fade show active"
-            id="ex1-tabs-1"
-            role="tabpanel"
-            aria-labelledby="ex1-tab-1"
-    >
-        <div>
-            <table id="table"
-                   data-toggle="table"
-                   data-toolbar="#toolbar"
-                   data-height="460"
-                   data-url="/project_tasks">
-                <thead>
-                <tr>
-                    <th data-field="role" data-sortable="true">Realm Role</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for role in realm_roles %}
-                <tr>
-                    <td>{{ role }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <!-- tab content -->
+        <div class="tab-content" id="ex1-content">
+            <div
+                    class="tab-pane fade show active"
+                    id="ex1-tabs-1"
+                    role="tabpanel"
+                    aria-labelledby="ex1-tab-1"
+            >
+                <div>
+                    <table id="table"
+                           class="table-bordered table-striped table-hover"
+                           data-toggle="table"
+                           data-toolbar="#toolbar">
+                        <thead>
+                        <tr>
+                            <th>Realm Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for role in realm_roles %}
+                            <tr>
+                                <td>{{ role }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<script>
-    var realmroles_tab = document.getElementById("ex1-tab-1");
-    var realmroles_content = document.getElementById("ex1-tabs-1");
+        <script>
+            var realmroles_tab = document.getElementById("ex1-tab-1");
+            var realmroles_content = document.getElementById("ex1-tabs-1");
 
-    choose_realm_roles = function() {
-      // switch tabs
-      otherstuff_tab.classList.remove("active");
-      realmroles_tab.classList.add("active");
+            choose_realm_roles = function () {
+                // switch tabs
+                realmroles_tab.classList.add("active");
 
-      // switch content
-      realmroles_content.classList.add("show");
-      realmroles_content.classList.add("active");
-    };
+                // switch content
+                realmroles_content.classList.add("show");
+                realmroles_content.classList.add("active");
+            };
 
-</script>
-{% else %}
-<h4>proof-of-concept</h4>
-<br>
-{% endif %}
+        </script>
+    {% else %}
+        <h4>proof-of-concept</h4>
+        <br>
+    {% endif %}
 {% endblock content %}

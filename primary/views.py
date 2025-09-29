@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse
-from primary.control.role_ctl import get_realm_roles
 from django.template import loader
+
+from primary.control.role_ctl import get_realm_roles
 from primary.control.view_ctl import allow_methods
 
 

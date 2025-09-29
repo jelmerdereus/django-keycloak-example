@@ -1,6 +1,8 @@
-from django.contrib.auth.models import User
-from allauth.socialaccount.models import SocialAccount
 import logging
+
+from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth.models import User
+
 
 # Get the realm roles for a user that are stated in the userinfo field
 # e.g. ['django_generic_access', 'offline_access', 'default-roles-jaylabs', 'uma_authorization', 'django_special_test']

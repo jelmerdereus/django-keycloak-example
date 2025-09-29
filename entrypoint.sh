@@ -25,7 +25,7 @@ if [[ -z ${IDP_OIDC_PRIVATE_KEY+x} ]]; then
 fi
 
 # wait for Postgresql
-sleep 20
+sleep 10
 
 # Start Django development server (replace with gunicorn if desired)
 python manage.py runserver 0.0.0.0:8000

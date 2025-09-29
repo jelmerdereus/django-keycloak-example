@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = bool(os.getenv("DJANGO_DEBUG", "false"))
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -75,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dcloak.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -115,7 +112,13 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL="http://localhost:8000/"
+LOGIN_REDIRECT_URL = "http://localhost:8000/"
+
+# Send all login redirects straight to Keycloak's OIDC login via allauth
+LOGIN_URL = "/accounts/openid_connect/login/?process=login&provider=keycloak"
+
+# Start provider login immediately (no intermediate confirmation page)
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -167,7 +170,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
