@@ -64,3 +64,6 @@ docker-compose.override.yml
 # Frontend (if present)
 node_modules/
 npm-debug.log*
+
+# readme
+*.md

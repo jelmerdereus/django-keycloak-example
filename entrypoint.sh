@@ -18,5 +18,14 @@ if [[ -n "${DJANGO_SUPERUSER_USERNAME:-}" && -n "${DJANGO_SUPERUSER_EMAIL:-}" &&
   || true
 fi
 
+# read a private key for the oidc client into an environment variable
+if [[ -z ${IDP_OIDC_PRIVATE_KEY+x} ]]; then
+  IDP_OIDC_PRIVATE_KEY="$(cat /app/oidc.key)"
+  export IDP_OIDC_PRIVATE_KEY
+fi
+
+# wait for Postgresql
+sleep 20
+
 # Start Django development server (replace with gunicorn if desired)
 python manage.py runserver 0.0.0.0:8000

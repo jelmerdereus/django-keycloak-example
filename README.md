@@ -28,11 +28,17 @@ docker-compose up -d
 #### Create a realm, user and django role
 - Go to http://localhost:8080/admin/
 - Create a realm in 'manage realms'
-- Go to 'identity providers' and create a 'Keycloak OpenID Connect provider'
-- The example endpoint is 'http://localhost:8080/realms/jaylabs/broker/keycloak-oidc/endpoint'
-- Create a user
-- Create a role 'django_general_user'
-
+- Go to 'clients' and choose a type OpenID Connect with a name 'django-keycloak'
+- Enable 'client authentication' and 'authorization'
+- valid redirect URL and post logout url: '*'
+- web origins: http://localhost:8000
+- Save and go to the 'credentials' tab. Copy the client secret into the .env file at 'DJANGO_KC_SECRET'
+- Go to 'realm roles' and create roles: 'django_generic_access' and 'django_special_test'
+- Go to 'Groups' and create a group 'django_special_group' and add the roles
+- Go to 'users' and create a user with this group assigned, and set an initial password
+- Go to the client 'django-keycloak' and open the scope 'django-keycloak-dedicated'
+- Add a mapper from the predefined mappers: 'realm roles'
+- Open the mapper and enable 'Add to userinfo'
 <br/>
 
 ### Environment variables

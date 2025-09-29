@@ -1,14 +1,38 @@
 services:
 
-  iam:
+  dcloak:
+    build: .
+    network_mode: host
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: "${POSTGRES_HOST}"
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      DJANGO_SECRET_KEY: "$DJANGO_SECRET_KEY"
+      DJANGO_DEBUG: "$DJANGO_DEBUG"
+      DJANGO_SUPERUSER_USERNAME: "${DJANGO_SUPERUSER_USERNAME}"
+      DJANGO_SUPERUSER_EMAIL: "${DJANGO_SUPERUSER_EMAIL}"
+      DJANGO_SUPERUSER_PASSWORD: "$DJANGO_SUPERUSER_PASSWORD"
+      DJANGO_SETTINGS_MODULE: "${DJANGO_SETTINGS_MODULE}"
+      DJANGO_KC_CLIENT: "${DJANGO_KC_CLIENT}"
+      DJANGO_KC_SECRET: "${DJANGO_KC_SECRET}"
+      KC_HOSTNAME: "${KC_HOSTNAME}"
+      LOG_LEVEL: "${LOG_LEVEL}"
+
+  keycloak:
     image: docker.io/keycloak/keycloak
-    network_mode: bridge
+    network_mode: host
     ports:
       - 8080:8080
       - 8443:8443
       - 9000:9000
     environment:
-      KC_HOSTNAME: "${KC_HOSTNAME}"
+      KC_HOSTNAME: "localhost"
       KC_HOSTNAME_PORT: 8080
       KC_HOSTNAME_STRICT_BACKCHANNEL: "${KC_HOSTNAME_STRICT_BACKCHANNEL}"
       KEYCLOAK_ADMIN: "${KEYCLOAK_ADMIN}"
@@ -18,12 +42,12 @@ services:
     command: ["start-dev", "--http-port", "8080", "--https-port", "8443"]
 
   # PostgreSQL
-  db:
+  postgres:
     image: postgres:15.14-bookworm
     restart: always
     # set shared memory limit when using docker compose
     shm_size: 128mb
-    network_mode: bridge
+    network_mode: host
     ports:
       - 5432:5432
     environment:

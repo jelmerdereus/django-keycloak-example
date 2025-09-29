@@ -95,6 +95,8 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+keycloak_host = os.getenv("KC_HOSTNAME", "localhost")
+
 SOCIALACCOUNT_PROVIDERS = {
     "openid_connect": {
         "APPS": [
@@ -104,7 +106,9 @@ SOCIALACCOUNT_PROVIDERS = {
                 "client_id": os.getenv("DJANGO_KC_CLIENT"),
                 "secret": os.getenv("DJANGO_KC_SECRET"),
                 "settings": {
-                    "server_url": "http://localhost:8080/realms/jaylabs/.well-known/openid-configuration",
+                    "server_url": f"http://{keycloak_host}:8080/realms/jaylabs/.well-known/openid-configuration",
+                    # Get the userinfo from the Keycloak server, that may contain claims
+                    "fetch_userinfo": True,
                 },
             }
         ]
@@ -175,55 +179,19 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-IDP_OIDC_PRIVATE_KEY = """-----BEGIN RSA PRIVATE KEY-----
-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
------END RSA PRIVATE KEY-----
-"""
+IDP_OIDC_PRIVATE_KEY = os.getenv("IDP_OIDC_PRIVATE_KEY")
+
+# logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": os.getenv("LOG_LEVEL", "INFO")
+    },
+}

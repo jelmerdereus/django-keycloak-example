@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<h3>Project Tasks</h3>
+<h3>Keycloak user page</h3>
 <br>
 <!-- tab navs -->
 <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
@@ -16,8 +16,8 @@
                 role="tab"
                 aria-controls="ex1-tabs-1"
                 aria-selected="true"
-                onclick="choose_alltasks()"
-        >All tasks</a>
+                onclick="choose_realm_roles()"
+        >My Realm Roles</a>
     </li>
     <li class="nav-item" role="presentation">
         <a
@@ -28,8 +28,8 @@
                 role="tab"
                 aria-controls="ex1-tabs-2"
                 aria-selected="false"
-                onclick="choose_mytasks()"
-        >My Tasks</a>
+                onclick="alert('not implemented yet');"
+        >Other Stuff</a>
     </li>
 </ul>
 
@@ -50,71 +50,33 @@
                    data-url="/project_tasks">
                 <thead>
                 <tr>
-                    <th data-field="project" data-sortable="true">Project</th>
-                    <th data-field="task_description" data-sortable="true">Task description</th>
-                    <th data-field="created" data-sortable="true">Created</th>
-                    <th data-field="priority" data-sortable="true">Priority</th>
-                    <th data-field="worker" data-sortable="true">Worker</th>
+                    <th data-field="role" data-sortable="true">Realm Role</th>
                 </tr>
                 </thead>
                 <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-        <div>
-            <table id="table2"
-                   data-toggle="table"
-                   data-toolbar="#toolbar"
-                   data-height="460"
-                   data-url="/own_project_tasks">
-                <thead>
+                {% for role in realm_roles %}
                 <tr>
-                    <th data-field="project" data-sortable="true">Project</th>
-                    <th data-field="task_description" data-sortable="true">Task description</th>
-                    <th data-field="created" data-sortable="true">Created</th>
-                    <th data-field="priority" data-sortable="true">Priority</th>
-                    <th data-field="worker" data-sortable="true">Worker</th>
+                    <td>{{ role }}</td>
                 </tr>
-                </thead>
-                <tbody>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 <script>
-    var alltasks_tab = document.getElementById("ex1-tab-1");
-    var alltasks_content = document.getElementById("ex1-tabs-1");
+    var realmroles_tab = document.getElementById("ex1-tab-1");
+    var realmroles_content = document.getElementById("ex1-tabs-1");
 
-    var mytasks_tab = document.getElementById("ex1-tab-2");
-    var mytasks_content = document.getElementById("ex1-tabs-2");
-
-    choose_mytasks = function() {
+    choose_realm_roles = function() {
       // switch tabs
-      alltasks_tab.classList.remove("active");
-      mytasks_tab.classList.add("active");
+      otherstuff_tab.classList.remove("active");
+      realmroles_tab.classList.add("active");
 
       // switch content
-      alltasks_content.classList.remove("active");
-      alltasks_content.classList.remove("show");
-      mytasks_content.classList.add("show");
-      mytasks_content.classList.add("active");
+      realmroles_content.classList.add("show");
+      realmroles_content.classList.add("active");
     };
-
-    choose_alltasks = function() {
-      // switch tabs
-      mytasks_tab.classList.remove("active");
-      alltasks_tab.classList.add("active");
-
-      // switch content
-      mytasks_content.classList.remove("active");
-      mytasks_content.classList.remove("show");
-      alltasks_content.classList.add("show");
-      alltasks_content.classList.add("active");
-    };
-
 
 </script>
 {% else %}

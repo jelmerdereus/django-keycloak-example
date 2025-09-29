@@ -23,23 +23,17 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock* poetry.toml* /app/
 
 # Install project dependencies (only main group; no dev)
-RUN poetry install --only main --no-interaction --no-ansi
+RUN poetry install --only main --no-interaction --no-ansi --no-root
 
 # Copy project files
 COPY . /app
 
 # Copy entrypoint script
-COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY ./entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Expose app port
 EXPOSE 8000
 
-# Default environment variables for superuser (override in runtime)
-# DJANGO_SUPERUSER_USERNAME=
-# DJANGO_SUPERUSER_EMAIL=
-# DJANGO_SUPERUSER_PASSWORD=
-# DJANGO_SETTINGS_MODULE=your_project.settings
-
 # Run the entrypoint (migrations, superuser, server)
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
