@@ -19,7 +19,20 @@
                         onclick="choose_realm_roles()"
                 >My Realm Roles</a>
             </li>
-            </li>
+            {% if special_permission %}
+                <li class="nav-item" role="presentation">
+                    <a
+                            data-mdb-tab-init
+                            class="nav-link"
+                            id="ex1-tab-2"
+                            href="#"
+                            role="tab"
+                            aria-controls="ex1-tabs-2"
+                            aria-selected="true"
+                            onclick="choose_special_permission()"
+                    >Special Content</a>
+                </li>
+            {% endif %}
         </ul>
 
 
@@ -52,19 +65,64 @@
                 </div>
             </div>
         </div>
+        <div class="tab-content" id="ex2-content">
+            <div
+                    class="tab-pane fade show active"
+                    id="ex1-tabs-2"
+                    role="tabpanel"
+                    aria-labelledby="ex1-tab-2"
+            >
+                <div>
+                    {% if special_permission %}
+                        <p>You have the special permission</p>
+                    {% else %}
+                        <p>You do not have the special permission</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
         <script>
             var realmroles_tab = document.getElementById("ex1-tab-1");
             var realmroles_content = document.getElementById("ex1-tabs-1");
 
-            choose_realm_roles = function () {
-                // switch tabs
-                realmroles_tab.classList.add("active");
+            var special_permission_tab = document.getElementById("ex1-tab-2");
+            var special_permission_content = document.getElementById("ex1-tabs-2");
 
-                // switch content
-                realmroles_content.classList.add("show");
-                realmroles_content.classList.add("active");
+            var activate_tab = function (tab_id) {
+                all_tabs = document.getElementsByClassName("nav-link");
+
+                for (var i = 0; i < all_tabs.length; i++) {
+                    if (all_tabs[i].id === tab_id) {
+                        all_tabs[i].classList.add("active");
+                    } else {
+                        all_tabs[i].classList.remove("active");
+                    }
+                }
             };
 
+            var activate_content = function (content_id) {
+                all_contents = document.getElementsByClassName("tab-pane fade");
+
+                for (var i = 0; i < all_contents.length; i++) {
+                    if (all_contents[i].id === content_id) {
+                        all_contents[i].classList.add("show");
+                        all_contents[i].classList.add("active");
+                    } else {
+                        all_contents[i].classList.remove("show");
+                        all_contents[i].classList.remove("active");
+                    }
+                }
+            };
+
+            var choose_realm_roles = function () {
+                activate_tab("ex1-tab-1");
+                activate_content("ex1-tabs-1");
+            };
+
+            var choose_special_permission = function () {
+                activate_tab("ex1-tab-2");
+                activate_content("ex1-tabs-2");
+            };
         </script>
     {% else %}
         <h4>proof-of-concept</h4>
